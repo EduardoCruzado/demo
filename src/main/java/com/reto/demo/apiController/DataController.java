@@ -1,12 +1,15 @@
 package com.reto.demo.apiController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
+import com.reto.demo.apiModel.DataModel;
+import com.reto.demo.apiModel.UserModel;
 import com.reto.demo.apiService.DataService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,9 +17,23 @@ public class DataController {
     @Autowired
     DataService dataService;
 
-    @GetMapping
-    public Map<String, ArrayList<String>> getData(){
-        return  dataService.listarData();
+    public DataController(DataService dataService) {
+        this.dataService = dataService;
+    }
+
+    @PostMapping
+    public Map<String, ArrayList<String>> getData() throws Exception{
+        ArrayList<String> format = new ArrayList<String>();
+        DataModel dataModel = dataService.listarDatos();
+
+        for( UserModel dato : dataModel.getData()){
+            format.add(dato.toString());
+        }
+
+       Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+       map.put("data",format);
+
+        return map ;
     }
 
 }

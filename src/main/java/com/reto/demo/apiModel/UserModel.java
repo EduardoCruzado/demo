@@ -31,6 +31,12 @@ public class UserModel {
         this.lastName = lastName;
     }
 
+    public UserModel(Integer id, String email, String lastName) {
+        this.id = id;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
     public String getEmail() {
         return email;
     }

@@ -7,6 +7,9 @@ public class DataModel {
     
     private UserModel data[];
 
+    public DataModel() {
+    }
+
     public UserModel[] getData() {
         return data;
     }

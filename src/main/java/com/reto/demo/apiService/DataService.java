@@ -26,13 +26,12 @@ public class DataService {
         this.baseUrl = baseUrl;
     }
 
-    public Map<String, ArrayList<String>> listarData(){
+    public Map<String, ArrayList<String>> listarData() throws Exception{
         
         ArrayList<String> format = new ArrayList<String>();
         ResponseEntity<DataModel> response =template.getForEntity(baseUrl,DataModel.class);
 
         DataModel dataModel = response.getBody();
-        System.out.println(dataModel.getData()[1].toString());
 
         for( UserModel dato : dataModel.getData()){
             format.add(dato.toString());
@@ -43,4 +42,14 @@ public class DataService {
 
         return map;
     }
+
+    public DataModel listarDatos() throws Exception{
+
+        ResponseEntity<DataModel> response =template.getForEntity(baseUrl,DataModel.class);
+
+        DataModel dataModel = response.getBody();
+
+        return dataModel;
+    }
+
 }
